@@ -57,9 +57,7 @@ const cars: Car[] = [
  *  getCarMake(cars[0]); // => "Toyota"
  */
 function getCarMake(car: Car): string {
-  // write your code here...
-
-  return ""; // replace empty string with what you see is fit
+  return car.make;
 }
 
 /**
@@ -72,9 +70,11 @@ function getCarMake(car: Car): string {
  *  isCarColorMatching(cars[1], "Blue"); // => false
  */
 function isCarColorMatching(car: Car, color: string): boolean {
-  // write your code here...
-
-  return false; // replace false with what you see is fit
+  if (car.color == color) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
@@ -104,9 +104,15 @@ function addCar(
   year: number,
   color: string
 ): Car[] {
-  // write your code here...
-
-  return []; // replace empty array with what you see is fit
+  let newCar = {
+    id: id,
+    make: make,
+    model: model,
+    year: year,
+    color: color,
+  };
+  cars.push(newCar);
+  return cars;
 }
 
 /**
@@ -119,9 +125,9 @@ function addCar(
  *  countCarsMadeInYear(cars, 2020); // => 2
  */
 function countCarsMadeInYear(cars: Car[], year: number): number {
-  // write your code here...
-
-  return Infinity; // replace Infinity with what you see is fit
+  return cars.filter((car) => {
+    return car.year == year;
+  }).length;
 }
 
 /**
@@ -136,9 +142,9 @@ function countCarsMadeInYear(cars: Car[], year: number): number {
  *    // => Array without the car having id 403.
  */
 function removeCarById(cars: Car[], id: number): Car[] {
-  // write your code here...
-
-  return []; // replace empty array with what you see is fit
+  return cars.filter((car) => {
+    return car.id !== id;
+  });
 }
 
 /**
@@ -161,9 +167,15 @@ function updateCarColor(
   id: number,
   newColor: string
 ): Car | "No Car Found" {
-  // write your code here...
-
-  return "No Car Found"; // replace "No Car Found" with what you see is fit
+  let foundCar = cars.find((car) => {
+    return car.id == id;
+  });
+  if (foundCar) {
+    foundCar.color = newColor;
+    return foundCar;
+  } else {
+    return "No Car Found";
+  }
 }
 
 export {
